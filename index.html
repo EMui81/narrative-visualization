@@ -75,7 +75,7 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
       .data(data)
       .enter()
       .append("circle")
-        .attr("cx", d => xScale(d.depth))
+        .attr("cx", d => xScale(d.date))
         .attr("cy", d => yScale(d.depth))
         .attr("r", 5)
         .style("fill", "#69b3a2")
