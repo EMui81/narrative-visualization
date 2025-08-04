@@ -52,8 +52,7 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
       .range([0, width]);
 
     const x = d3.scaleTime()
-	.domain(d3.extent(data, d => d.date))
-	.range([0, width]);
+      .domain([new Date("1973-01-02"), d3.max(data, d => d.date)]);
 
     const yScale = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.depth)]).range([height, 0]);
