@@ -59,7 +59,8 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
 
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale))
+        .call(d3.axisBottom(x))
+      	.tickFormat(d3.timeFormat("%Y"))
 	.selectAll("text")  
     	.style("text-anchor", "end")
     	.attr("dx", "-.8em")
