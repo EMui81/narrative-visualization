@@ -1,4 +1,4 @@
-h<html lang="en">
+<html lang="en">
 <style>
   font-family:helvetica
 </style>
@@ -19,9 +19,9 @@ h<html lang="en">
 <div id="total_chart"></div>
 
 <div>
-    <a href="index.html" class="total_button">Total</a>
-    <a href="magnitude.html" class="magnitude_button">Magnitude</a>
+    <a href="index.html" class="magnitude_button">Magnitude</a>
     <a href="depth.html" class="depth_button">Depth</a>
+    <a href="phases.html" class="phases_button">Number of Phases Arriving</a>
 </div>
 
 <p>Data from: <a href="https://www.kaggle.com/datasets/taweilo/taiwan-earthquake-dataset/data">Taiwan Earthquake Dataset</a></p>
@@ -32,7 +32,7 @@ const margin = {top: 20, right: 30, bottom: 60, left: 80};
 const width = 960 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 
-const svg = d3.select("#total_chart")
+const svg = d3.select("#magnitude_chart")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
