@@ -58,7 +58,7 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/di
 
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale).ticks(d3.timeYear.every(1))
+        .call(d3.axisBottom(xScale).ticks(d3.timeYear.every(5))
         .tickFormat(d3.timeFormat("%Y")))
 	.selectAll("text")  
     	.style("text-anchor", "end")
