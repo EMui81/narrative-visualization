@@ -40,6 +40,11 @@ const svg = d3.select("#magnitude_chart")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
 var parseDate = d3.timeParse("%Y-%m-%d");
+
+var dates = [];
+for (let obj of data) {
+  dates.push(parseTime(obj.date));
+}
 	
 d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/earthquake-detail.csv").then(data => {
     data.forEach(d => {
@@ -53,7 +58,8 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
 
     const x = d3.scaleTime()
       .domain(d3.extent(data, d => d.date))
-      .range([0, width]);
+      .range([0, width])
+      .nice();
 
     const yScale = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.depth)]).range([height, 0]);
@@ -61,12 +67,13 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(x).ticks(d3.timeYear.every(1))
-    .tickFormat(d3.timeFormat("%Y")))
+        .tickFormat(d3.timeFormat("%Y")))
 	.selectAll("text")  
     	.style("text-anchor", "end")
     	.attr("dx", "-.8em")
     	.attr("dy", ".15em")
-   	.attr("transform", "rotate(-65)");
+   	.attr("transform", "rotate(-65)")
+	.nice();
 
     svg.append("g")
         .call(d3.axisLeft(yScale));
@@ -75,7 +82,7 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
       .data(data)
       .enter()
       .append("circle")
-        .attr("cx", d => xScale(parseDate(d.date)))
+        .attr("cx", d => x(parseDate(d.date)))
         .attr("cy", d => yScale(d.depth))
         .attr("r", 5)
         .style("fill", "#69b3a2")
