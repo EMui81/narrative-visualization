@@ -41,10 +41,6 @@ const svg = d3.select("#magnitude_chart")
 
 var parseDate = d3.timeParse("%Y-%m-%d");
 
-var dates = [];
-for (let obj of data) {
-  dates.push(parseTime(obj.date));
-}
 	
 d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/earthquake-detail.csv").then(data => {
     data.forEach(d => {
