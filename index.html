@@ -68,8 +68,7 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
     	.style("text-anchor", "end")
     	.attr("dx", "-.8em")
     	.attr("dy", ".15em")
-   	.attr("transform", "rotate(-65)")
-	.nice();
+   	.attr("transform", "rotate(-65)");
 
     svg.append("g")
         .call(d3.axisLeft(yScale));
