@@ -52,14 +52,16 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
       .range([0, width]);
 
     const x = d3.scaleTime()
-      .domain(d3.extent(data, d => d.date);
+      .domain(d3.extent(data, d => d.date)
+      .range([0, width]);;
 
     const yScale = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.depth)]).range([height, 0]);
 
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale))
+        .call(d3.axisBottom(xScale).ticks(d3.timeYear.every(1))
+    .tickFormat(d3.timeFormat("%Y")))
 	.selectAll("text")  
     	.style("text-anchor", "end")
     	.attr("dx", "-.8em")
