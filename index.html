@@ -28,9 +28,9 @@
 
 </body>
 <script>
-const margin = { top: 20, right: 30, bottom: 40, left: 60 };
-const width = 600 - margin.left - margin.right;
-const height = 400 - margin.top - margin.bottom;
+const margin = {top: 20, right: 30, bottom: 60, left: 80};
+const width = 960 - margin.left - margin.right;
+const height = 500 - margin.top - margin.bottom;
 
 const svg = d3.select("#total_chart")
     .append("svg")
@@ -44,15 +44,12 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
         d.depth = +d.depth;
     });
 
-    const xScale = d3.scaleBand()
-        .domain(data.map(d => d.date))
-        .range([0, width])
-        .padding(0.1);
+    const xScale = d3.scaleTime()
+      .domain(d3.extent(data, d => d.date))
+      .range([0, width]);
 
-    const yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.depth)])
-        .nice()
-        .range([height, 0]);
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value)]).range([height, 0]);
 
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
@@ -61,18 +58,19 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
     svg.append("g")
         .call(d3.axisLeft(yScale));
 
-    svg.selectAll(".bar")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", d => xScale(d.date))
-        .attr("y", d => yScale(d.value))
-        .attr("width", xScale.bandwidth())
-        .attr("height", d => height - yScale(d.value));
+    svg.selectAll("dot")
+      .data(data)
+      .enter()
+      .append("circle")
+        .attr("cx", d => x(d.date))
+        .attr("cy", d => y(d.depth))
+        .attr("r", 5)
+        .style("fill", "#69b3a2");
+	.style("opacity", 0.5)
 }).catch(error => {
     console.error("Error:", error);
 });
+
 
 </script>
 </html>
