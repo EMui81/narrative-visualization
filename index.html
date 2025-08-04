@@ -1,4 +1,4 @@
-<html lang="en">
+h<html lang="en">
 <style>
   font-family:helvetica
 </style>
@@ -53,7 +53,7 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
 	.range([0, width]);
 
     const yScale = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.value)]).range([height, 0]);
+      .domain([0, d3.max(data, d => d.depth)]).range([height, 0]);
 
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
