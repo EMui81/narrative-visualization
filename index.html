@@ -53,7 +53,7 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
       .range([0, width]);
 
     const x = d3.scaleTime()
-      .domain(d3.extent(data, d => d.date))
+      .domain(d3.extent(data, d => parseDate(d.date)))
       .range([0, width])
       .nice();
 
