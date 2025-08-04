@@ -102,6 +102,18 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/di
       .duration(200)
       .style("opacity", 0)
   })
+
+const type = d3.annotationCallout
+
+const annotations = [{
+  note: {
+    label: "Longer text to show text wrapping",
+    title: "Annotations :)"
+  },
+  type: type,
+  x: 172,
+  y: 403,
+}]
 }).catch(error => {
     console.error("Error:", error);
 });
