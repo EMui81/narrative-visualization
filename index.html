@@ -69,8 +69,8 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/ea
         .attr("cx", d => x(d.date))
         .attr("cy", d => y(d.depth))
         .attr("r", 5)
-        .style("fill", "#69b3a2");
-	.style("opacity", 0.5)
+        .style("fill", "#69b3a2")
+	.style("opacity", 0.5);
 }).catch(error => {
     console.error("Error:", error);
 });
