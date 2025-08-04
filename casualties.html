@@ -1,0 +1,85 @@
+<html lang="en">
+<style>
+  font-family:helvetica
+</style>
+<script src="https://d3js.org/d3.v6.js"></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A History of Earthquakes in Taiwan</title>
+</head>
+<body>
+  <h1>A History of Earthquakes in Taiwan</h1>
+  <p>In this final chart, we can see the casualties for significantly disastrous earthquakes in Taiwan over the years.</p>	
+</body>
+
+<div id="casualties_chart"></div>
+
+<div>
+    <a href="index.html" class="magnitude_button">Magnitude</a>
+    <a href="depth.html" class="depth_button">Depth</a>
+    <a href="casualties.html" class="casualties_button">Casualties</a>
+</div>
+
+<p>Data from: <a href="https://www.kaggle.com/datasets/taweilo/taiwan-earthquake-dataset/data">Taiwan Earthquake Dataset</a></p>
+
+</body>
+<script>
+const margin = {top: 20, right: 30, bottom: 60, left: 80};
+const width = 1920 - margin.left - margin.right;
+const height = 500 - margin.top - margin.bottom;
+
+const svg = d3.select("#casualties_chart")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+var parseDate = d3.timeParse("%Y-%m-%d");
+
+	
+d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/disastrous-earthquake-clean.csv").then(data => {
+    data.forEach(d => {
+	d.Date = parseDate(d.Date);
+        d.Casualties = +d.Casualties;
+    });
+
+    const xScale = d3.scaleTime()
+      .domain(d3.extent(data, d => d.Date))
+      .range([0, width])
+      .nice();
+
+    const yScale = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.Casualties)]).range([height, 0]);
+
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(xScale).ticks(d3.timeYear.every(5))
+        .tickFormat(d3.timeFormat("%Y")))
+	.selectAll("text")  
+    	.style("text-anchor", "end")
+    	.attr("dx", "-.8em")
+    	.attr("dy", ".15em")
+   	.attr("transform", "rotate(-65)");
+
+    svg.append("g")
+        .call(d3.axisLeft(yScale));
+
+    svg.selectAll("dot")
+      .data(data)
+      .enter()
+      .append("circle")
+        .attr("cx", d => xScale(d.Date))
+        .attr("cy", d => yScale(d.Casualties))
+        .attr("r", 5)
+        .style("fill", "#69b3a2")
+	.style("opacity", 0.5);
+}).catch(error => {
+    console.error("Error:", error);
+});
+</script>
+</html>
