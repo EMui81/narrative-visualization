@@ -57,6 +57,9 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/di
     const yScale = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.Magnitude)]).range([height, 0]);
 
+    var tooltip = d3.select("#magnitude_chart").append("div")
+      .attr("class", "tooltip")
+
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(xScale).ticks(d3.timeYear.every(5))
@@ -79,6 +82,27 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/di
         .attr("r", 5)
         .style("fill", "#69b3a2")
 	.style("opacity", 0.5);
+
+
+    .on("mouseover", function(event, d) {
+    tooltip
+      .style("opacity", 1)
+  })
+
+     .on("mousemove", function(event, d) {
+     tooltip
+      .html("<b>" + d.Location + "</b><br>Magnitude: " + d.Magnitude + " <br>Date: " + d.Date)
+      .style("left", (event.pageX)+ 10 + "px")
+      .style("top", (event.pageY) + "px")
+
+  })
+
+     .on("mouseleave", function(d) {
+      tooltip
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
+  })
 }).catch(error => {
     console.error("Error:", error);
 });
