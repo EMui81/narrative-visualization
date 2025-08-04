@@ -1,5 +1,20 @@
-<h1>A History of Earthquakes in Taiwan</h1>
-<p>Because of Taiwan's location along the Pacific "Ring of Fire", the country is particular prone to very frequent earthquakes. Coupled with Taiwan's abundance of mountains and tall structures, these earthquakes can be quite dangerous for citizens. The Taiwan of today is prepared to handle earthquakes thanks to improved disaster response and reduction, a quality that was developed as a necessary response. This page aims to visualize Taiwan's history of earthquakes and their impacts from 1973 to 2024.</p>
+<html lang="en">
+<style>
+  font-family:helvetica
+</style>
+<script src="https://d3js.org/d3.v6.js"></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+<link rel="stylesheet" href="main.css">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>More EV For Your Euro</title>
+</head>
+<body>
+  <h1>A History of Earthquakes in Taiwan</h1>
+  <p>Because of Taiwan's location along the Pacific "Ring of Fire", the country is particular prone to very frequent earthquakes. Coupled with Taiwan's abundance of mountains and tall structures, these earthquakes can be quite dangerous for citizens. The Taiwan of today is prepared to handle earthquakes thanks to improved disaster response and reduction, a quality that was developed as a necessary response. This page aims to visualize Taiwan's history of earthquakes and their impacts from 1973 to 2024.</p>
+</body>
 
 <div id="total_chart"></div>
 
@@ -11,54 +26,9 @@
 
 <p>Data from: <a href="https://www.kaggle.com/datasets/taweilo/taiwan-earthquake-dataset/data">Taiwan Earthquake Dataset</a></p>
 
-<html>
-<script src='https://d3js.org/d3.v5.min.js'></script>
-<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
-<style> circle {fill: lightblue; stroke: black;} </style>
-<body onload='init()'>
-<svg width=300 height=300>
-</svg>
-<script>
-  
-
-  
-async function init() {
-
-const data = await d3.csv('https://flunky.github.io/cars2017.csv');
-const width = 200
-const height = 200
-const margin = 50
-const log = d3.scaleLog()
-const log10 = log(10)
-
-var x = d3.scaleLog().domain([10, 150]).range([0,width])
-var y = d3.scaleLog().domain([10, 150]).range([height,0])
-
-var xAxis = d3.axisBottom(x).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s"));
-var yAxis = d3.axisLeft(y).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s"));
-
-d3.select("svg")
-.attr("width", width +2*margin)
-.attr("height", height +2*margin)
-.append("g").attr("transform","translate("+margin+","+margin+")")
-.selectAll()
-.data(data)
-.enter()
-.append("circle")
-.attr("cx", function(d) { return x(d.AverageCityMPG); })
-.attr("cy", function(d) { return y(d.AverageHighwayMPG); })
-.attr("r", function(d) { return 2 + parseInt(d.EngineCylinders); })
-
-d3.select("svg")
-.append("g")
-.attr("transform", "translate("+margin+","+margin+")")
-.call(yAxis);
-
-d3.select("svg")
-.append("g")
-.attr("transform", "translate("+margin+","+(height+margin)+")")
-.call(xAxis);
-}
-</script>
 </body>
+<script>
+
+
+</script>
 </html>
