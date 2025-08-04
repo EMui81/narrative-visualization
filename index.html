@@ -54,7 +54,7 @@ d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/di
       .nice();
 
     const yScale = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.depth)]).range([height, 0]);
+      .domain([0, d3.max(data, d => d.Magnitude)]).range([height, 0]);
 
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
