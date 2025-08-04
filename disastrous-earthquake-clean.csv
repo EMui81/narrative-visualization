@@ -1,4 +1,4 @@
-﻿Date,Location,Latitude,Longitude,Depth (km),Magnitude,Casualties,Injured ,Missing,Collapsed building
+﻿Date,Location,Latitude,Longitude,Depth,Magnitude,Casualties,Injured ,Missing,Collapsed building
 1720-10-31,Tainan,23.4,120.5,-,6.0,,,,
 1736-01-30,Tainan-Jiayi,23.1,120.3,-,7.0,372,,,689
 1776-12-11,Jiayi,-,-,-,-,,,,
@@ -103,5 +103,6 @@
 2024-04-03,Hualien Shoufeng,24.13,121.65,13.4,6.5,,,,
 2024-04-23,Hualien Offshore,23.72,121.66,10.0,6.0,,,,
 2024-04-23,Hualien Shoufeng,23.85,121.54,10.0,6.3,,,,
+
 
 
