@@ -45,7 +45,7 @@ var parseDate = d3.timeParse("%Y-%m-%d");
 d3.csv("https://raw.githubusercontent.com/EMui81/narrative-visualization/main/disastrous-earthquake-clean.csv").then(data => {
     data.forEach(d => {
 	d.Date = parseDate(d.Date);
-        d.Magnitude = +d.Magnitude;
+        d.Depth = +d.Depth;
     });
 
     const xScale = d3.scaleTime()
